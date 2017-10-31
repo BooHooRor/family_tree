@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User:</h1>
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @user.sex %>
+</p>
+
+<p>
+  <strong>Birthdate:</strong>
+  <%= @user.birthdate %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @user.address %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @user.phone_number %>
+</p>
+
+<%= (link_to 'Add Parent', new_parent_path(@user)) if @user.parents.count < 2 %>
+
+<%= link_to 'Add Sibling', new_sibling_path(@user) if @user.sibling == nil %>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+
+<h1>Parents:</h1>
+<% if @user.parents.any? %>
+  <% @user.parents.each do |parent| %>
+    <%= link_to parent.full_name, user_path(parent) %><br>
+  <% end %>
+<% end %>
+
+<h1>Sibling:</h1>
+  <%= link_to @user.sibling.full_name, user_path(@user.sibling) if @user.sibling %>
